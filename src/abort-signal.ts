@@ -68,6 +68,14 @@ export function abortSignal(signal: AbortSignal): void {
     signal.dispatchEvent<"abort">({ type: "abort" })
 }
 
+export function resetSignal(signal: AbortSignal): void {
+    if (abortedFlags.get(signal) !== true) {
+        return
+    }
+
+    abortedFlags.set(signal, false)
+}
+
 /**
  * Aborted flag for each instances.
  */

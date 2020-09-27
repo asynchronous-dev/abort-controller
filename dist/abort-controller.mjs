@@ -47,6 +47,12 @@ function abortSignal(signal) {
     abortedFlags.set(signal, true);
     signal.dispatchEvent({ type: "abort" });
 }
+function resetSignal(signal) {
+    if (abortedFlags.get(signal) !== true) {
+        return;
+    }
+    abortedFlags.set(signal, false);
+}
 /**
  * Aborted flag for each instances.
  */
@@ -85,6 +91,9 @@ class AbortController {
      */
     abort() {
         abortSignal(getSignal(this));
+    }
+    reset() {
+        resetSignal(getSignal(this));
     }
 }
 /**

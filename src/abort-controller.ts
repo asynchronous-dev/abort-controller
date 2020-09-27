@@ -1,4 +1,8 @@
-import AbortSignal, { abortSignal, createAbortSignal } from "./abort-signal"
+import AbortSignal, {
+    abortSignal,
+    resetSignal,
+    createAbortSignal,
+} from "./abort-signal"
 
 /**
  * The AbortController.
@@ -24,6 +28,10 @@ export default class AbortController {
      */
     public abort(): void {
         abortSignal(getSignal(this))
+    }
+
+    public reset(): void {
+        resetSignal(getSignal(this))
     }
 }
 
